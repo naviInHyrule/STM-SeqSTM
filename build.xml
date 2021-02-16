@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="STM">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="STM.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="./libs/commons-cli-1.2.jar"/>
+        <pathelement location="./libs/commons-collections-3.2.1.jar"/>
+        <pathelement location="./libs/commons-configuration-1.9.jar"/>
+        <pathelement location="./libs/commons-lang-2.6.jar"/>
+        <pathelement location="./libs/commons-logging-1.1.1.jar"/>
+        <pathelement location="./libs/commons-math3-3.2.jar"/>
+        <pathelement location="./libs/mallet-deps.jar"/>
+        <pathelement location="./libs/mallet.jar"/>
+    </path>
+	
+    <target name="init" description="Create bin directory and subdirectories">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	
+    <target name="clean" description="Clean the project">
+        <delete dir="bin"/>
+    </target>
+	
+    <target depends="init" name="build" description="Compile all the java files" >
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" 
+        	target="${target}" includejavaruntime="true" includeantruntime="false">
+            <src path="src"/>
+            <classpath refid="STM.classpath"/>
+        </javac>
+    </target>
+	
+	<!--target depends="clean, build" name="makejar" description="make a runnable jar file">
+	        <jar destfile="./stm.jar">
+	            <manifest>
+	                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+	                <attribute name="Rsrc-Main-Class" value="STM"/>
+	                <attribute name="Class-Path" value="."/>
+	                <attribute name="Rsrc-Class-Path" value="./ commons-cli-1.2.jar commons-collections-3.2.1.jar commons-configuration-1.9.jar commons-lang-2.6.jar commons-logging-1.1.1.jar commons-math3-3.2.jar mallet-deps.jar mallet.jar"/>
+	            </manifest>
+	            <zipfileset src="jar-in-jar-loader.zip"/>
+	            <fileset dir="./bin"/>
+	            <zipfileset dir="./libs" includes="commons-cli-1.2.jar"/>
+	            <zipfileset dir="./libs" includes="commons-collections-3.2.1.jar"/>
+	            <zipfileset dir="./libs" includes="commons-configuration-1.9.jar"/>
+	            <zipfileset dir="./libs" includes="commons-lang-2.6.jar"/>
+	            <zipfileset dir="./libs" includes="commons-logging-1.1.1.jar"/>
+	            <zipfileset dir="./libs" includes="commons-math3-3.2.jar"/>
+	            <zipfileset dir="./libs" includes="mallet-deps.jar"/>
+	            <zipfileset dir="./libs" includes="mallet.jar"/>
+	        </jar>
+	    </target-->
+</project>

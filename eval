@@ -1,0 +1,38 @@
+#
+# The class path
+#
+
+CLASSPATH="./libs/commons-collections-3.2.1.jar:./libs/commons-cli-1.2.jar:./libs/commons-configuration-1.9.jar:./libs/commons-lang-2.6.jar:./libs/commons-logging-1.1.1.jar:./libs/commons-math3-3.2.jar:./libs/mallet-deps.jar:./libs/mallet.jar:./bin"
+
+#
+# Modify the following settings accordingly.
+#
+
+# the configuration file
+CONFIG="./configs/example.config"
+
+# the output file directory
+ROOT="./results/train/"
+
+# the number of topics
+K=20
+
+# The Dirichlet parameter alpha
+ALPHA=0.1
+
+# The Dirichlet parameter gamma
+GAMMA=0.01
+
+# The discount parameter of PDP
+A=0.2
+
+# The concentration parameter of PDP
+B=10.0
+
+# The total number of chains to run
+NUM=1
+
+# The verbose level
+VERBOSE=5000
+
+java -cp ${CLASSPATH} STM -config ${CONFIG} -root ${ROOT} -k ${K} -alpha ${ALPHA} -gamma ${GAMMA} -a ${A} -b ${B} -gnum ${NUM} -i -verbose ${VERBOSE}
